@@ -1,8 +1,8 @@
 import React from 'react';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { render } from 'react-dom';
-
+import App from './components/app';
 
 const reducer = (state = {}, action = {}) => {
    return state
@@ -10,18 +10,18 @@ const reducer = (state = {}, action = {}) => {
 
 const RootReducer = combineReducers({reducer});
 
-const App = React.createClass({
-   render: function () {
-      return (<span>Hello World</span>)
-   }
-})
+// const App = React.createClass({
+//    render: function () {
+//       return (<span>Hello World</span>)
+//    }
+// })
 
-const MyApp = connect()(App);
+// const MyApp = connect()(App);
 
 
 render(
   <Provider store={createStore(RootReducer)}>
-   <MyApp />
+   <App />
   </Provider>,
   document.getElementById('root')
 );
