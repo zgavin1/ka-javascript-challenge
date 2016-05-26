@@ -23,7 +23,7 @@ const walkCallback = (
       case "VariableDeclaration":
          if (node.parent.type === "BlockStatement" && node.parent.parent.type === "ForStatement") {
             dispatch({type: "FOUND_VARDEC_NESTED_IN_FORLOOP"});
-            structure = true;
+            structures = true;
          }
          break;
       default:
