@@ -1,5 +1,14 @@
 #Khan Academy JavaScript project
 
+Instructions:
+
+Clone this repo, navigate into the project directory, and run `npm install`. Then you can open the index.html file in your browser.
+
+- OR -
+
+In your browser, navigate to my published project page at http://www.zach-gavin.com/ka-javascript-challenge.
+
+
 ##Dev Process
 
 ### Step 1
