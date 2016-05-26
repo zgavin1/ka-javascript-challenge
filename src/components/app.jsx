@@ -6,6 +6,7 @@ import Notifications from './notifications';
 const App = () => {
    return (
       <div>
+         <header> Declare a variable inside of a for loop.</header>
          <TextArea />
          <Notifications />
       </div>

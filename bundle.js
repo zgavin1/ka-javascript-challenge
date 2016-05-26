@@ -21254,6 +21254,11 @@
 	   return _react2.default.createElement(
 	      'div',
 	      null,
+	      _react2.default.createElement(
+	         'header',
+	         null,
+	         ' Declare a variable inside of a for loop.'
+	      ),
 	      _react2.default.createElement(_textarea2.default, null),
 	      _react2.default.createElement(_notifications2.default, null)
 	   );
