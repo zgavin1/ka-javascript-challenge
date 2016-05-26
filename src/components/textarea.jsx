@@ -6,11 +6,16 @@ import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/github';
 
+import test from './../testingApi';
+
 const TextArea = React.createClass({
+
    updateCode: function(newCode) {
-      console.log(newCode);
+      test(this.props.lists, this.props.structures, newCode, this.props.dispatch);
    },
+
    render: function() {
+      // debugger
       const options = {
          lineNumbers: true
       };
@@ -21,6 +26,7 @@ const TextArea = React.createClass({
                theme="github"
                onChange={this.updateCode}
                name="UNIQUE_ID_OF_DIV"
+               value={this.props.parsedCode}
                editorProps={{$blockScrolling: true}}
                />
          </div>
@@ -28,4 +34,15 @@ const TextArea = React.createClass({
    }
 });
 
-export default connect()(TextArea);
+const select = (state) => {
+   return {
+      state: state,
+      parsedCode: state.parsedCode,
+      lists: state.lists,
+      structures: state.structures
+   }
+}
+
+
+
+export default connect(select)(TextArea);

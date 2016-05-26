@@ -1,9 +1,20 @@
 import { combineReducers } from 'redux';
 
+const parsedCode= (
+   state = "",
+   action
+) => {
+   switch (action.type) {
+      case "UPDATE_PARSED_CODE":
+         return action.parsedCode;
+      default:
+         return state;
+   }
+}
+
 const defaultBlacklist = {whileStatement: false}
 const defaultWhitelist = {forStatement: false}
 const defaultState = {
-   parsedCode: {},
    blacklist: defaultBlacklist,
    whitelist: defaultWhitelist
 }
@@ -41,11 +52,6 @@ const lists = (
    action
 ) => {
    switch (action.type) {
-      case "UPDATE_PARSED_CODE":
-         return { 
-            ...state,
-            parsedCode: action.parsedCode
-         };
       case "FOUND_WHILE_STATEMENT":
          return { ...state, blacklist: blacklist(undefined, action) };
       case "FOUND_FOR_STATEMENT":
@@ -82,4 +88,8 @@ const structures = (
 }
 
 
-export default combineReducers({lists, structures});
+export default combineReducers({
+   lists,
+   structures,
+   parsedCode
+});
