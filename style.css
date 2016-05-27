@@ -1,0 +1,54 @@
+html, body, main, container, div, input, h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+
+  text-align: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+  color: inherit;
+  cursor: default;
+
+  background-color: transparent;
+}
+
+/*CLEAR FIX*/
+.group:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+main {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+container {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+container h1 {
+  padding: 10px;
+}
+
+container * {
+  margin: auto;
+}
+
+#editor {
+  border: 1px solid #eeeeee;
+}
+
+.notifications {
+  text-align: center;
+}
+
+.notifications * {
+  color: red;
+  margin: 5px;
+}

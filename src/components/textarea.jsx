@@ -20,16 +20,14 @@ const TextArea = React.createClass({
          lineNumbers: true
       };
       return (
-         <div>
             <AceEditor
                mode="javascript"
                theme="github"
                onChange={this.updateCode}
-               name="UNIQUE_ID_OF_DIV"
+               name="editor"
                value={this.props.parsedCode}
                editorProps={{$blockScrolling: true}}
                />
-         </div>
       );
    }
 });

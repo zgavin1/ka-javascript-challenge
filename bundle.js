@@ -21308,18 +21308,14 @@
 	      var options = {
 	         lineNumbers: true
 	      };
-	      return _react2.default.createElement(
-	         'div',
-	         null,
-	         _react2.default.createElement(_reactAce2.default, {
-	            mode: 'javascript',
-	            theme: 'github',
-	            onChange: this.updateCode,
-	            name: 'UNIQUE_ID_OF_DIV',
-	            value: this.props.parsedCode,
-	            editorProps: { $blockScrolling: true }
-	         })
-	      );
+	      return _react2.default.createElement(_reactAce2.default, {
+	         mode: 'javascript',
+	         theme: 'github',
+	         onChange: this.updateCode,
+	         name: 'editor',
+	         value: this.props.parsedCode,
+	         editorProps: { $blockScrolling: true }
+	      });
 	   }
 	});
 	
@@ -49507,7 +49503,7 @@
 	
 	      return _react2.default.createElement(
 	         'div',
-	         null,
+	         { className: 'notifications' },
 	         whitelistLabel,
 	         blacklistLabel,
 	         structuresLabel
@@ -49651,7 +49647,7 @@
 	var InputContainer = function InputContainer() {
 	   return _react2.default.createElement(
 	      'container',
-	      { className: 'container' },
+	      { className: 'container group' },
 	      _react2.default.createElement(
 	         'h1',
 	         null,

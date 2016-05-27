@@ -39,7 +39,7 @@ const Notifications = React.createClass({
       const structuresLabel = this.handleStructureLabel(this.props.structures);
 
       return (
-         <div>
+         <div className="notifications">
             {whitelistLabel}
             {blacklistLabel}
             {structuresLabel}
