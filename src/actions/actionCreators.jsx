@@ -7,7 +7,6 @@ export default {
       return {type: "FOUND_FOR_STATEMENT"};
    },
    foundWhileLoop: () => {
-      debugger
       return {type: "FOUND_WHILE_STATEMENT"};
    },
    foundVarDecNestedInForLoop: () => {

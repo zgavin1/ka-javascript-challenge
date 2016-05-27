@@ -29,14 +29,14 @@ main {
 container {
   margin: 0 auto;
   display: block;
-  text-align: center;
 }
 
 container h1 {
   padding: 10px;
+  text-align: center;
 }
 
-container * {
+container > #editor {
   margin: auto;
 }
 
