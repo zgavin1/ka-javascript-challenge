@@ -1,6 +1,8 @@
 import esprima from 'esprima';
 import walk from 'esprima-walk';
 
+import actions from './actions/actionCreators';
+
 
 const walkCallback = (
   dispatch,
@@ -13,16 +15,16 @@ const walkCallback = (
       case "ForStatement":
          console.log("You've used a for loop.");
          whitelist.forStatement = true;
-         dispatch({type: "FOUND_FOR_STATEMENT"});
+         dispatch(actions.foundForLoop());
          break;
       case "WhileStatement":
          console.log("You've used a 'while' loop.");
          blacklist.whileStatement = true
-         dispatch({type: "FOUND_WHILE_STATEMENT"});
+         dispatch(actions.foundWhileLoop());
          break;
       case "VariableDeclaration":
          if (node.parent.type === "BlockStatement" && node.parent.parent.type === "ForStatement") {
-            dispatch({type: "FOUND_VARDEC_NESTED_IN_FORLOOP"});
+            dispatch(actions.foundVarDecNestedInForLoop());
             structures = true;
          }
          break;
@@ -39,8 +41,7 @@ const parseCode = (lists, structures, string, dispatch) => {
    } catch(err) {
       return;
    }
-   // debugger
-   dispatch({type: "UPDATE_PARSED_CODE", parsedCode: string})
+   dispatch(actions.updateParsedCode(string))
 
    let whitelist = {forStatement: false};
    let blacklist = {whileStatement: false};
@@ -52,13 +53,13 @@ const parseCode = (lists, structures, string, dispatch) => {
    // the next two conditions check to see if this specific walk through the nodes
    // found the types on our lists. If not, it updates accordingly
    if (!whitelist.forStatement && lists.whitelist.forStatement) {
-      dispatch({type: "NO_FOUND_FOR_STATEMENT"});
+      dispatch(actions.noFoundForLoop());
    }
    if (!blacklist.whileStatement && lists.blacklist.whileStatement) {
-      dispatch({type: "NO_FOUND_WHILE_STATEMENT"});
+      dispatch(actions.noFoundWhileLoop());
    }
    if (!localStructure && structures.varDeclNestedInForLoop) {
-      dispatch({type: "NO_FOUND_VARDEC_NESTED_IN_FORLOOP"});
+      dispatch(actions.noFoundNestedVarDecLoop());
    }
 };
 

@@ -21240,9 +21240,9 @@
 	
 	var _reactRedux = __webpack_require__(158);
 	
-	var _textarea = __webpack_require__(182);
+	var _mainContainer = __webpack_require__(200);
 	
-	var _textarea2 = _interopRequireDefault(_textarea);
+	var _mainContainer2 = _interopRequireDefault(_mainContainer);
 	
 	var _notifications = __webpack_require__(197);
 	
@@ -21252,14 +21252,9 @@
 	
 	var App = function App() {
 	   return _react2.default.createElement(
-	      'div',
+	      'main',
 	      null,
-	      _react2.default.createElement(
-	         'header',
-	         null,
-	         ' Declare a variable inside of a for loop.'
-	      ),
-	      _react2.default.createElement(_textarea2.default, null),
+	      _react2.default.createElement(_mainContainer2.default, null),
 	      _react2.default.createElement(_notifications2.default, null)
 	   );
 	};
@@ -43560,6 +43555,10 @@
 	
 	var _esprimaWalk2 = _interopRequireDefault(_esprimaWalk);
 	
+	var _actionCreators = __webpack_require__(201);
+	
+	var _actionCreators2 = _interopRequireDefault(_actionCreators);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var walkCallback = function walkCallback(dispatch, whitelist, blacklist, structures, node) {
@@ -43567,16 +43566,16 @@
 	      case "ForStatement":
 	         console.log("You've used a for loop.");
 	         whitelist.forStatement = true;
-	         dispatch({ type: "FOUND_FOR_STATEMENT" });
+	         dispatch(_actionCreators2.default.foundForLoop());
 	         break;
 	      case "WhileStatement":
 	         console.log("You've used a 'while' loop.");
 	         blacklist.whileStatement = true;
-	         dispatch({ type: "FOUND_WHILE_STATEMENT" });
+	         dispatch(_actionCreators2.default.foundWhileLoop());
 	         break;
 	      case "VariableDeclaration":
 	         if (node.parent.type === "BlockStatement" && node.parent.parent.type === "ForStatement") {
-	            dispatch({ type: "FOUND_VARDEC_NESTED_IN_FORLOOP" });
+	            dispatch(_actionCreators2.default.foundVarDecNestedInForLoop());
 	            structures = true;
 	         }
 	         break;
@@ -43592,8 +43591,7 @@
 	   } catch (err) {
 	      return;
 	   }
-	   // debugger
-	   dispatch({ type: "UPDATE_PARSED_CODE", parsedCode: string });
+	   dispatch(_actionCreators2.default.updateParsedCode(string));
 	
 	   var whitelist = { forStatement: false };
 	   var blacklist = { whileStatement: false };
@@ -43604,13 +43602,13 @@
 	   // the next two conditions check to see if this specific walk through the nodes
 	   // found the types on our lists. If not, it updates accordingly
 	   if (!whitelist.forStatement && lists.whitelist.forStatement) {
-	      dispatch({ type: "NO_FOUND_FOR_STATEMENT" });
+	      dispatch(_actionCreators2.default.noFoundForLoop());
 	   }
 	   if (!blacklist.whileStatement && lists.blacklist.whileStatement) {
-	      dispatch({ type: "NO_FOUND_WHILE_STATEMENT" });
+	      dispatch(_actionCreators2.default.noFoundWhileLoop());
 	   }
 	   if (!localStructure && structures.varDeclNestedInForLoop) {
-	      dispatch({ type: "NO_FOUND_VARDEC_NESTED_IN_FORLOOP" });
+	      dispatch(_actionCreators2.default.noFoundNestedVarDecLoop());
 	   }
 	};
 	
@@ -49626,6 +49624,80 @@
 	   structures: structures,
 	   parsedCode: parsedCode
 	});
+
+/***/ },
+/* 199 */,
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(158);
+	
+	var _textarea = __webpack_require__(182);
+	
+	var _textarea2 = _interopRequireDefault(_textarea);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var InputContainer = function InputContainer() {
+	   return _react2.default.createElement(
+	      'container',
+	      { className: 'container' },
+	      _react2.default.createElement(
+	         'h1',
+	         null,
+	         ' Declare a variable inside of a for loop.'
+	      ),
+	      _react2.default.createElement(_textarea2.default, null)
+	   );
+	};
+	
+	exports.default = (0, _reactRedux.connect)()(InputContainer);
+
+/***/ },
+/* 201 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	exports.default = {
+	   updateParsedCode: function updateParsedCode(string) {
+	      return { type: "UPDATE_PARSED_CODE", parsedCode: string };
+	   },
+	
+	   foundForLoop: function foundForLoop() {
+	      return { type: "FOUND_FOR_STATEMENT" };
+	   },
+	   foundWhileLoop: function foundWhileLoop() {
+	      debugger;
+	      return { type: "FOUND_WHILE_STATEMENT" };
+	   },
+	   foundVarDecNestedInForLoop: function foundVarDecNestedInForLoop() {
+	      return { type: "FOUND_VARDEC_NESTED_IN_FORLOOP" };
+	   },
+	
+	   noFoundForLoop: function noFoundForLoop() {
+	      return { type: "NO_FOUND_FOR_STATEMENT" };
+	   },
+	   noFoundWhileLoop: function noFoundWhileLoop() {
+	      return { type: "NO_FOUND_WHILE_STATEMENT" };
+	   },
+	   noFoundNestedVarDecLoop: function noFoundNestedVarDecLoop() {
+	      return { type: "NO_FOUND_FOR_STATEMENT" };
+	   }
+	};
 
 /***/ }
 /******/ ]);
