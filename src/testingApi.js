@@ -8,7 +8,7 @@ const walkCallback = (
   dispatch,
   whitelist,
   blacklist,
-  structures,
+  localStructure,
   node
 ) => {
    switch (node.type) {
@@ -25,7 +25,7 @@ const walkCallback = (
       case "VariableDeclaration":
          if (node.parent.type === "BlockStatement" && node.parent.parent.type === "ForStatement") {
             dispatch(actions.foundVarDecNestedInForLoop());
-            structures = true;
+            localStructure = true;
          }
          break;
       default:
@@ -47,7 +47,7 @@ const parseCode = (lists, structures, string, dispatch) => {
    let blacklist = {whileStatement: false};
    let localStructure = false;
    // walk the nodes with esprima-walk, dispatching actions for watched properties
-   walk.walkAddParent(parsed, walkCallback.bind(null, dispatch, whitelist, blacklist, structures));
+   walk.walkAddParent(parsed, walkCallback.bind(null, dispatch, whitelist, blacklist, localStructure));
 
 
    // the next two conditions check to see if this specific walk through the nodes
